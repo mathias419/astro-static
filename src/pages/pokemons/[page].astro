@@ -1,0 +1,75 @@
+---
+import type { GetStaticPaths } from "astro";
+import PokemonCards from "../../components/Pokemons/PokemonCards.astro";
+import type { PokemonListResponse } from "../../interface/pokemon-list.response.ts";
+
+import MainLayout from "../../layouts/MainLayout.astro";
+import "../../styles/global.css";
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const resp = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151');
+  const { results } = (await resp.json()) as PokemonListResponse;
+
+  return paginate(results, { pageSize: 20 });
+}) satisfies GetStaticPaths;
+
+const title = 'Pokémon Static | Home';
+const { page } = Astro.props;
+---
+
+<MainLayout title={title}>
+  <h1 class="text-3xl">listado pokemons</h1>
+  <hr />
+  <section
+    ari-label="Listado de Pokemons"
+    class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-4"
+  >
+    {
+       page.data.map(({ name, url }) => (
+        <PokemonCards name={name} url={url} />
+      ))
+    }
+  </section>
+<section class="flex mt-10 gap-2 items-center">
+  <a
+    href={page.url.prev || undefined}
+    class:list={[
+      "p-2 text-white rounded-md",
+      {
+        "bg-blue-500": page.url.prev,
+        "bg-gray-600 text-gray-400 pointer-events-none":
+          !page.url.prev,
+      },
+    ]}
+    aria-disabled={!page.url.prev}
+    tabindex={!page.url.prev ? -1 : 0}
+  >
+    Anteriores
+  </a>
+
+  <a
+    href={page.url.next || undefined}
+    class:list={[
+      "p-2 text-white rounded-md",
+      {
+        "bg-blue-500": page.url.next,
+        "bg-gray-600 text-gray-400 pointer-events-none":
+          !page.url.next,
+      },
+    ]}
+    aria-disabled={!page.url.next}
+    tabindex={!page.url.next ? -1 : 0}
+  >
+    Siguientes
+  </a>
+
+  <div class="flex-1"></div>
+
+  <span>Página 1</span>
+</section>
+</MainLayout>
+
+  <!-- <ul>
+    {data.results.map((pokemon) => <li>{pokemon.name}</li>)}
+  </ul> -->
+</MainLayout>
