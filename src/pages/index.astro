@@ -1,4 +1,5 @@
 ---
+import PokemonCards from "../components/Pokemons/PokemonCards.astro";
 import type { PokemonListResponse } from "../interface/pokemon-list.response.ts";
 const title = "Pokemon Static";
 
@@ -13,7 +14,17 @@ import "../styles/global.css";
 <MainLayout title={title}>
   <h1 class="text-3xl">listado pokemons</h1>
   <hr />
-  <ul>
+  <section
+    ari-label="Listado de Pokemons"
+    class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-4"
+  >
+    {
+      data.results.map(({ name, url }) => (
+        <PokemonCards name={name} url={url} />
+      ))
+    }
+  </section>
+  <!-- <ul>
     {data.results.map((pokemon) => <li>{pokemon.name}</li>)}
-  </ul>
+  </ul> -->
 </MainLayout>
