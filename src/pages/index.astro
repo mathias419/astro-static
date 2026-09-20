@@ -1,23 +1,19 @@
 ---
-import type {PokemonListResponse} from '../interface/pokemon-list.response.ts';
-const title ="pokemon static";
+import type { PokemonListResponse } from "../interface/pokemon-list.response.ts";
+const title = "Pokemon Static";
 
-const resp = await fetch('https://pokeapi.co/api/v2/pokemon')
-const data = await resp.json() as PokemonListResponse;
+const resp = await fetch("https://pokeapi.co/api/v2/pokemon");
+const data = (await resp.json()) as PokemonListResponse;
 console.log(data);
 
 import MainLayout from "../layouts/MainLayout.astro";
 import "../styles/global.css";
 ---
+
 <MainLayout title={title}>
-	<h1 class="text-3xl">listado pokemons</h1>
-	<hr/>
-	<ul>
-{
-data.results.map((pokemon)=>(<li>{pokemon.name}</li>))
-}
-	</ul>
-
-
-
+  <h1 class="text-3xl">listado pokemons</h1>
+  <hr />
+  <ul>
+    {data.results.map((pokemon) => <li>{pokemon.name}</li>)}
+  </ul>
 </MainLayout>

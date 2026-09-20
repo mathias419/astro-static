@@ -1,0 +1,22 @@
+{
+  "Crear interfaz": {
+    "scope": "astro,typescript,typescriptreact",
+    "prefix": "apropsi",
+    "body": [
+      "interface ${1:Props} {",
+      "  ${2:propName}: ${3:string};",
+      "}",
+      "$0"
+    ],
+    "description": "Crear una interfaz"
+  },
+  "Crear constante": {
+    "scope": "astro,javascript,typescript,typescriptreact",
+    "prefix": "aprops",
+    "body": [
+      "const ${1:nombre} = ${2:valor};",
+      "$0"
+    ],
+    "description": "Crear una constante"
+  }
+}
