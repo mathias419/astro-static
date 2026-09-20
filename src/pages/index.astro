@@ -1,6 +1,6 @@
 ---
-import PokemonCards from "../components/Pokemons/PokemonCards.astro";
-import type { PokemonListResponse } from "../interface/pokemon-list.response.ts";
+import PokemonCards from "@components/Pokemons/PokemonCards.astro";
+import type { PokemonListResponse } from "@interface/pokemon-list.response.ts";
 const title = "Pokemon Static";
 
 const resp = await fetch("https://pokeapi.co/api/v2/pokemon");
