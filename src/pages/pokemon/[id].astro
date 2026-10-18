@@ -4,6 +4,7 @@ import PokemonCards from "@components/Pokemons/PokemonCards.astro";
 import "../../styles/global.css";
 import type { PokemonListResponse } from "@interface/pokemon-list.response";
 import type { GetStaticPaths } from "astro";
+import Title from "@components/Pokemons/shared/Title.astro";
 
 export const getStaticPaths = (async () => {
   const resp = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151");
@@ -29,7 +30,7 @@ const audioSrc = `https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pok
   <section class="mt-10 mx-10 flex flex-col justify-center items-center">
     <div>
       <a href="/" class="text-blue-500 hover:underline">Regresar</a>
-      <h1 class="text-5xl capitalize">{name}</h1>
+       <Title>{name}</Title>
     </div>
 
     <PokemonCards name={name} url={url} isBig={true} />

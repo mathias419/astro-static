@@ -9,10 +9,11 @@ console.log(data);
 
 import MainLayout from "../layouts/MainLayout.astro";
 import "../styles/global.css";
+import Title from "@components/Pokemons/shared/Title.astro";
 ---
 
 <MainLayout title={title}>
-  <h1 class="text-3xl">listado pokemons</h1>
+  <Title>listado pokemons</Title>
   <hr />
   <section
     ari-label="Listado de Pokemons"
