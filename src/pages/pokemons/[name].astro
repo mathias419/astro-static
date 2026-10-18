@@ -11,11 +11,10 @@ export const getStaticPaths = (async () => {
   const resp = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151");
   const { results } = (await resp.json()) as PokemonListResponse;
 
-  return results.map(({ name, url }) => (
-    { 
-        params: { name },
-        props: { name, url },
-     }));
+  return results.map(({ name, url }) => ({
+    params: { name },
+    props: { name, url },
+  }));
 }) satisfies GetStaticPaths;
 
 const { name } = Astro.params;
@@ -32,17 +31,19 @@ const imageSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprit
   image={imageSrc}
 >
   <section class="mt-10 mx-10 flex flex-col justify-center items-center">
-   <div class="flex flex-row">
-     <div>
-      <button onclick="history.back()" class="text-blue-500 hover:underline">Regresar</button>
-      <Title>{name}</Title>
-    </div>
+    <div class="flex flex-row">
+      <div>
+        <button onclick="history.back()" class="text-blue-500 hover:underline"
+          >Regresar</button
+        >
+        <Title>{name}</Title>
+      </div>
 
-    <button id="btn-favorite" class="text-blue-500 hover:animate-pulse">
-      <Icon name="heart-outline" size={50}/>
-      <Icon name="heart-full" size={50} class="hidden"/>
-    </button>
-   </div>
+      <button id="btn-favorite" class="text-blue-500 hover:animate-pulse" data-name={name} data-id={id}>
+        <Icon name="heart-outline" size={50} />
+        <Icon name="heart-full" size={50} class="hidden" />
+      </button>
+    </div>
 
     <PokemonCards name={name} url={url} isBig={true} />
 
@@ -52,3 +53,23 @@ const imageSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprit
     </audio>
   </section>
 </MainLayout>
+
+<script>
+  interface FavoritePokemon {
+    name: string;
+    id: number;
+  }
+
+  document.addEventListener('astro:page-load', ()=>{
+    const btnFavorite = document.querySelector('#btn-favorite') as HTMLButtonElement
+
+    if (!btnFavorite) return
+    const name = btnFavorite.dataset.name
+    const id = btnFavorite.dataset.id
+  
+    btnFavorite.addEventListener('click', ()=>{
+     console.log({name, id})
+  })
+
+  })
+</script>
