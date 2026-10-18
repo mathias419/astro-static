@@ -1,11 +1,22 @@
 {
   "extends": "astro/tsconfigs/strict",
-  "exclude": ["dist"],
-  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": [
+    "dist"
+  ],
+  "include": [
+    ".astro/types.d.ts",
+    "**/*"
+  ],
   "compilerOptions": {
     "paths": {
-      "@components/*": ["./src/components/*"],
-      "@interface/*": ["./src/interface/*"],
-    }
+      "@components/*": [
+        "./src/components/*"
+      ],
+      "@interface/*": [
+        "./src/interface/*"
+      ]
+    },
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js"
   }
 }
