@@ -3,10 +3,19 @@ import Title from "../../components/Pokemons/shared/Title.astro";
 import { Counter } from "../../components/Counter";
 import MainLayout from "../../layouts/MainLayout.astro";
 import "../../styles/global.css";
+
+const counterValue = 20;
 ---
 
 <MainLayout title="Favoritos">
   <Title>Islas</Title>
+
+  <video controls="" autoplay="" transition:persist>
+  <source
+    src="https://www.youtube.com/watch?v=YKidndVBat4"
+    type="video/mp4"
+  />
+</video>
 
   <div
     style={{
@@ -17,5 +26,11 @@ import "../../styles/global.css";
   >
   </div>
 
-  <Counter client:visible />
+ <Counter 
+  transition:persist="counter"
+  transition:persist-props
+  client:visible
+  initValue={counterValue}>
+ <Title> Counter Island</Title>
+ </Counter>
 </MainLayout>
