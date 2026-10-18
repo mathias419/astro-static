@@ -79,29 +79,35 @@ const imageSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprit
     if (!btnFavorite) return;
     const name = btnFavorite.dataset.name ?? "";
     const id = btnFavorite.dataset.id ?? "";
+    const isFavorite = favoritePokemons.some((fav) => fav.name === name);
 
     const heartOutline = btnFavorite.querySelector(
       "[data-outline]",
     ) as HTMLElement;
     const heartFull = btnFavorite.querySelector("[data-full]") as HTMLElement;
-const toggleFavorite = () => {
-  const isFavorite = favoritePokemons.some((fav) => fav.name !== name);
-  if (isFavorite){
 
-  } else{
-    favoritePokemons.push({
-      id: +id,
-      name: name,   
-  });
-  localStorage.setItem('favorites',JSON.stringify(favoritePokemons));
-};
-};
+    if (isFavorite) {
+      heartOutline.classList.add("hidden");
+      heartFull.classList.remove("hidden");
+    }
+
+    const toggleFavorite = () => {
+      const isFavorite = favoritePokemons.some((fav) => fav.name !== name);
+      if (isFavorite) {
+      } else {
+        favoritePokemons.push({
+          id: +id,
+          name: name,
+        });
+        localStorage.setItem("favorites", JSON.stringify(favoritePokemons));
+      }
+    };
 
     btnFavorite.addEventListener("click", () => {
       heartOutline.classList.toggle("hidden");
       heartFull.classList.toggle("hidden");
 
-      toggleFavorite()
+      toggleFavorite();
     });
   };
 
