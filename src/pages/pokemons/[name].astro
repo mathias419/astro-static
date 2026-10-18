@@ -61,11 +61,7 @@ const imageSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprit
 
 <script>
   import { json, locales } from "astro:schema";
-
-  interface FavoritePokemon {
-    name: string;
-    id: number;
-  }
+  import type {FavoritePokemon} from '../../interface/favorite-pokemon'
 
   const handlePageLoad = () => {
     let favoritePokemons: FavoritePokemon[] = JSON.parse(
